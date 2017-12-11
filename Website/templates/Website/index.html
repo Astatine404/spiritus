@@ -1,0 +1,27 @@
+{% extends 'Website/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+<title>Project Spiritus</title>
+{% endblock %}
+
+{% block content %}
+<div id="fullpage">
+	<div class="section">
+		<img id="logo" src="{% static 'img/logo.png' %}"></img>
+		<a href="#app"><img id="arrow" src="{% static 'img/arrow-icon.gif' %}"></img></a>
+	</div>
+	<div class="section">
+		<img id="flame" src="{% static 'img/flame.png' %}"></img>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	$('#fullpage').fullpage({
+			anchors: ['home', 'app'],
+			sectionsColor: ['#000000', '#000000'],
+		});
+	});
+</script>
+{% endblock %}
