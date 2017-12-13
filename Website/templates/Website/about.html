@@ -1,0 +1,32 @@
+{% extends 'Website/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+	<title>AI Mozart | About</title>
+{% endblock %}
+
+{% block content %}
+
+<br><br><br>
+
+<div class='ui center aligned container'>
+	<div class="panel panel-success" style="text-align: center;	">
+		<div class='panel-heading'>
+			<h2>About The Project</h2>
+		</div>		
+		<div class='panel-body'>
+			<p>
+			The great Mozart is known all throughout the world for his indelible impact on classical music. We admire his style of music composition. But his works are limited in number. Today, after 230 years of the Mozart era, he still lives on through his songs. We have endeavoured to bring him back to life through our project - AI Mozart.
+			</p>
+			<p>We have trained our Neural Network (LSTM - a type of RNN) on his work along with other eminent musicians like Beethoven and Chopin. This adds diversity to the dataset we provide, thus resulting in completely new kind of music. Each time one clicks on 'Generate', a unique music sample is generated.
+			</p> 
+			<p>
+				This project is made for Microsoft's Code.Fun.Do. This gave us an opportunity to learn new skills, especially in the field of Machine Learning. 
+			</p>
+			<p style="font-family: Satisfy; text-align: center;">
+				Created by Team Alchemists - Sumanth, Saurabh, Abhay.
+			</p>
+		</div>
+	</div>
+
+{% endblock %}

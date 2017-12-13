@@ -1,0 +1,36 @@
+{% extends 'Website/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+	<title>AI Mozart | VFD</title>
+{% endblock %}
+
+{% block content %}
+
+<br><br><br>
+
+<div class='container'>
+
+	<div class="panel panel-success" style="text-align: center;	">
+		<div class='panel-heading'>
+			<h2>Our Vision</h2>
+		</div>		
+		<div class='panel-body'>
+			<p>
+				We want to make our project accessible and useful to various musical communities and individuals, especially for new compositions. Our AI-generated composition is completely unique and melodious. Music, when added some level of diversity, gives excellent results and we plan to do this with varied musical talents and hope to aid the process of music composition. 
+			</p>
+		</div>
+	</div>
+	<br><br>
+	<div class="panel panel-success" style="text-align: center;	">
+		<div class='panel-heading'>
+			<h2>Further Development</h2>
+		</div>		
+		<div class='panel-body'>
+			<p>
+				As for now, our neural network though can theoretically generate endless music, it works best only for the first 30 seconds of generation. Also, the network requires modified MIDI format which we wrote. But we hope to feed the network, any kind of playable format such as .wav, .mp3 etc. We plan to achieve this by using Generative Adversarial Networks (GANs). The availability of a generator and discriminator in the network surely overcomes the drawbacks of character-based LSTM cells. The upgraded version of this project converts songs into pictures, removing vocals and feeding the network. The expected output should have multiple instruments playing along with proper percussion (beats) - generating unique full-fledged instrumental music of today's kind.
+			</p>
+		</div>
+	</div>
+
+{% endblock %}
