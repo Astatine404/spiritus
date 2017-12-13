@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from .forms import MusicForm
 from django.shortcuts import render
 from .models import Music
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 
@@ -11,8 +12,8 @@ def index(request):
 		form = MusicForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
-			vids = Music.objects.all()
-			vid = vids[0]
+			vid = Music.objects.all().last()
+			print(vid)
 			return render(request, 'Website/index.html', {'vid': vid})
 		else:
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
