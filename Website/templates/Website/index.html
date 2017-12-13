@@ -8,11 +8,29 @@
 {% block content %}
 <div id="fullpage">
 	<div class="section">
-		<img id="logo" src="{% static 'img/logo.png' %}"></img>
-		<a href="#app"><img id="arrow" src="{% static 'img/arrow-icon.gif' %}"></img></a>
+		<img id="logo" src="{% static 'img/logo.png' %}">
+		<a href="#app"><img id="arrow" src="{% static 'img/arrow-icon.gif' %}"></a>
 	</div>
+
 	<div class="section">
-		<img id="flame" src="{% static 'img/flame.png' %}"></img>
+		<img id="flame" src="{% static 'img/flame.png' %}">
+		<div class="ui center aligned container" align="center">
+			<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit" class="btn btn-success">Upload</button>
+			</form>
+		</div>
+
+	{% if vid %}
+		<div class="ui center aligned container" align="center">
+			<div class="styled_video_container">
+				<video width="640" height='640' controls>
+					<source src="{{ vid.video }}" type="video/mp4">
+				</video> 
+			</div>
+		</div>
+	{% endif %}
 	</div>
 </div>
 
