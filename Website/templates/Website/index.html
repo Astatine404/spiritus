@@ -1,4 +1,5 @@
 {% extends 'Website/base.html' %}
+
 {% load staticfiles %}
 
 {% block title %}
@@ -17,29 +18,44 @@
 		<div class="ui center aligned container" align="center">
 			<form method="post" enctype="multipart/form-data">
 				{% csrf_token %}
-				{{ form.as_p }}
-				<button type="submit" class="btn btn-success">Upload</button>
+				<input type="file" name="myfile" class="btn btn-primary">
+				<br>
+				<button type="submit" class="btn btn-success" id='butt'>Upload</button>
 			</form>
-		</div>
 
-	{% if vid %}
-		<div class="ui center aligned container" align="center">
-			<div class="styled_video_container">
-				<video width="640" height='640' controls>
-					<source src="media/{{ vid.video }}" type="video/mp4">
-				</video> 
+			{% if vid %}
+				<div class="ui center aligned container">
+					<video width="500" height='300' controls>
+						<source src="media/{{ vid }}" type="video/mp4">
+					</video> 
+				</div>
+<!-- <figure id="videoContainer" data-fullscreen="false">
+		<video id="video" controls preload="metadata" height="370">
+			<source src="{{ vid }}" type="video/mp4">
+
+			<object type="application/x-shockwave-flash" data="flash-player.swf?videoUrl={{ vid }}" width="1024" height="576">
+				<param name="allowfullscreen" value="true" />
+				<param name="wmode" value="transparent" />
+			</object>
+		</video>
+		<div id="video-controls" class="controls" data-state="hidden">
+			<button id="playpause" type="button" data-state="play">Play/Pause</button>
+			<button id="stop" type="button" data-state="stop">Stop</button>
+			<div class="progress">
+				<progress id="progress" value="0" min="0">
+					<span id="progress-bar"></span>
+				</progress>
 			</div>
+			<button id="mute" type="button" data-state="mute">Mute/Unmute</button>
+			<button id="volinc" type="button" data-state="volup">Vol+</button>
+			<button id="voldec" type="button" data-state="voldown">Vol-</button>
+			<button id="fs" type="button" data-state="go-fullscreen">Fullscreen</button>
 		</div>
-	{% endif %}
+</figure> -->
+
+			{% endif %}
+		</div>
 	</div>
 </div>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-	$('#fullpage').fullpage({
-			anchors: ['home', 'app'],
-			sectionsColor: ['#000000', '#000000'],
-		});
-	});
-</script>
 {% endblock %}
