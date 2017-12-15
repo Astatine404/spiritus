@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from .forms import MusicForm
 from django.shortcuts import render
 from .models import Music
+from django.conf import settings
 from django.http import HttpResponseRedirect
 from moviepy.editor import VideoFileClip, AudioFileClip
 import moviepy.editor as mpe
@@ -14,20 +15,17 @@ def index(request):
 	form = MusicForm()
 
 	if request.method == 'POST':
-		
-		old_root = os.path.abspath(os.path.dirname(__file__))
-		new_root = old_root.replace("/Website", "")
 
-		root = new_root + "/Spiritus"
+		root = settings.MEDIA_ROOT
 		myfile = request.FILES['myfile']
 		
 		vvid = Music()
 		vvid.video = myfile
 		vvid.save()
  
-		vids = root + "/media/" + str(vvid.video)
-		auds = root + "/media/mozz.mp3"
-		resu = "/media/final_" + str(vvid.video)
+		vids = root + str(vvid.video)
+		auds = root + "/mozz.mp3"
+		resu = "final_" + str(vvid.video)
 		resl = root + resu
 
 		ovid = Music()
@@ -48,6 +46,7 @@ def index(request):
 		new_clip.write_videofile(resl)
 
 		if myfile:
+			resu = "/media/" + resu
 			return render(request, 'Website/index.html', {'form': form, 'vid': myfile, 'resu': resu})
 		else:
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
