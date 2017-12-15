@@ -1,4 +1,5 @@
 {% extends 'Website/base.html' %}
+
 {% load staticfiles %}
 
 {% block title %}
@@ -17,29 +18,20 @@
 		<div class="ui center aligned container" align="center">
 			<form method="post" enctype="multipart/form-data">
 				{% csrf_token %}
-				{{ form.as_p }}
-				<button type="submit" class="btn btn-success">Upload</button>
+				<input type="file" name="myfile" class="btn btn-primary">
+				<br>
+				<button type="submit" class="btn btn-success" id='butt'>Upload</button>
 			</form>
-		</div>
 
-	{% if vid %}
-		<div class="ui center aligned container" align="center">
-			<div class="styled_video_container">
-				<video width="640" height='640' controls>
-					<source src="{{ vid.video }}" type="video/mp4">
-				</video> 
-			</div>
+			{% if vid %}
+				<div class="ui center aligned container">
+					<video width="500" height='300' controls>
+						<source src="{{ resu }}" type="video/mp4">
+					</video> 
+				</div>
+			{% endif %}
 		</div>
-	{% endif %}
 	</div>
 </div>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-	$('#fullpage').fullpage({
-			anchors: ['home', 'app'],
-			sectionsColor: ['#000000', '#000000'],
-		});
-	});
-</script>
 {% endblock %}

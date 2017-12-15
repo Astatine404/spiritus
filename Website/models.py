@@ -5,7 +5,7 @@ from django.db import models
 # Create your views here.
 
 class Music(models.Model):
-	video = models.FileField(upload_to='media/')
+	video = models.FileField(upload_to='')
 
 	def __str__(self):
 		return str(self.pk)
