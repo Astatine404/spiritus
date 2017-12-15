@@ -6,33 +6,55 @@ from .models import Music
 from django.http import HttpResponseRedirect
 from moviepy.editor import VideoFileClip, AudioFileClip
 import moviepy.editor as mpe
+import os
 
 # Create your views here.
 
 def index(request):
+	form = MusicForm()
+
 	if request.method == 'POST':
-		form = MusicForm()
+		
+		old_root = os.path.abspath(os.path.dirname(__file__))
+		new_root = old_root.replace("/Website", "")
+
+		root = new_root + "/Spiritus"
 		myfile = request.FILES['myfile']
+		
 		vvid = Music()
 		vvid.video = myfile
 		vvid.save()
+ 
+		vids = root + "/media/" + str(vvid.video)
+		auds = root + "/media/mozz.mp3"
+		resu = "/media/final_" + str(vvid.video)
+		resl = root + resu
 
-		videoclip = VideoFileClip("/home/abhay/Desktop/Django/spiritus/Spiritus/media/SampleVideo_1280x720_5mb.mp4")
-		background_music = mpe.AudioFileClip("/home/abhay/Desktop/Django/spiritus/Spiritus/media/mozz.mp3")
-		new_clip = videoclip.set_audio(background_music)
-		new_clip.write_videofile("/home/abhay/Desktop/Django/spiritus/Spiritus/media/final_cut.mp4")
+		ovid = Music()
+		ovid.video = resu
+		ovid.save()
 
-		vidloc = vvid.video
-		vid = str(vidloc)
+		videoclip = VideoFileClip(vids)
+		background_music = mpe.AudioFileClip(auds)
+
+		if videoclip.duration < background_music.duration:
+			clipped_back = background_music.set_end(videoclip.duration)
+		else:
+			clipped_back = background_music
+
+		vvid.delete()
+
+		new_clip = videoclip.set_audio(clipped_back)
+		new_clip.write_videofile(resl)
 
 		if myfile:
-			return render(request, 'Website/index.html', {'form': form, 'vid': vid})
+			return render(request, 'Website/index.html', {'form': form, 'vid': myfile, 'resu': resu})
 		else:
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 	else:
 		vid = Music.objects.all()
-
+		print vid
 		vid.delete()
 		vid = None
-		form = MusicForm()
+		
 		return render(request, 'Website/index.html', {'form': form, 'vid': vid})
