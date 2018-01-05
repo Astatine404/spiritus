@@ -24,8 +24,8 @@ from io import StringIO
 from matplotlib import pyplot as plt
 from PIL import Image
 
-if tf.__version__ != '1.4.0':
-  raise ImportError('Please upgrade your tensorflow installation to v1.4.0!')
+#if tf.__version__ != '1.4.0':
+ # raise ImportError('Please upgrade your tensorflow installation to v1.4.0!')
 
 
 # ## Env setup
@@ -174,7 +174,7 @@ with detection_graph.as_default():
           use_normalized_coordinates=True,
           line_thickness=15)
 
-      cv2.imshow('object detection', cv2.resize(image_np, (800,600))) ## i have commented this part out.
+  #    cv2.imshow('object detection', cv2.resize(image_np, (800,600))) ## i have commented this part out.
       if cv2.waitKey(25) & 0xFF == ord('q'):
         cv2.destroyAllWindows()
         break
